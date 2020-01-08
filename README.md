@@ -11,3 +11,5 @@ nmo.m       - apply NMO to seismic data with supplied velocity function
 frad.m      - forward radon transform  
 irad.m      - Radon transform adjoint   
 semb.m      - velocity analysis, display semblance for velocity picking  
+
+All functions start with a complete description of the inputs

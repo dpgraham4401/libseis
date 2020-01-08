@@ -1,4 +1,5 @@
-# seismic-data-processing
+# DPG_2DSeis_proc
+# seismic data processing
 MATLAB functions for 2D seismic data processing
 These are relatively simple scripts I made for a school project and,
 do not include much functionality such as interactive picking.

@@ -2,5 +2,5 @@
 	path = libseis-rs
 	url = https://github.com/dpgraham4401/libseis-rs.git
 [submodule "libseis-matlab"]
-	path = libseis-rs
-	url = https://github.com/dpgraham4401/libseis-matlab.git
+	path = libseis-matlab
+	url = ./libseis-matlab

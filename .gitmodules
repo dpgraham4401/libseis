@@ -1,3 +1,6 @@
-[submodule "seis-proc-rs"]
-	path = seis-proc-rs
-	url = https://github.com/dpgraham4401/seis-proc-rs.git
+[submodule "libseis-rs"]
+	path = libseis-rs
+	url = https://github.com/dpgraham4401/libseis-rs.git
+[submodule "libseis-matlab"]
+	path = libseis-rs
+	url = https://github.com/dpgraham4401/libseis-matlab.git

@@ -1,4 +1,5 @@
 *.out
+.idea/*
 build/
 *.bin
 .cache/

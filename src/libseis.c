@@ -3,30 +3,21 @@
 #include <stdlib.h>
 #include <string.h>
 
-
 struct cmp {
-    int id;
-    char *file_path;
-    int nt;
-    int nx;
-    float *data;
+  int id;
+  char *file_path;
+  int nt;
+  int nx;
+  float *data;
 };
 
 struct trace {
-    int nt;
-    float x_offset;
-    float y_offset;
-    int shot_id;
-    int cmp_id;
+  int nt;
+  float x_offset;
+  float y_offset;
+  int shot_id;
+  int cmp_id;
 };
-
-int add_internal(int x, int y) {
-    return x + y;
-}
-
-int add(int x, int y) {
-    return add_internal(x, y);
-}
 
 float *read_float(char *path, int nt, int nx) {
     FILE *fptr;

@@ -1,17 +1,18 @@
-#pragma once
-#if defined _WIN32 || defined __CYGWIN__
-#ifdef BUILDING_LIBSEIS
-#define LIBSEIS_PUBLIC __declspec(dllexport)
-#else
-#define LIBSEIS_PUBLIC __declspec(dllimport)
-#endif
-#else
-#ifdef BUILDING_LIBSEIS
-#define LIBSEIS_PUBLIC __attribute__ ((visibility ("default")))
-#else
-#define LIBSEIS_PUBLIC
-#endif
-#endif
+// Libseis.h
 
-float LIBSEIS_PUBLIC gain(float *data, int nt, int nx, float dt, float pow);
+float gain(float *data, int nt, int nx, float dt, float pow);
+float *read_float(char *path, int nt, int nx);
 
+typedef enum {
+  SINGLE,
+  DOUBLE,
+} PRECISION;
+
+struct gather {
+  int id;
+  char *file_path;
+  int nt;
+  int nx;
+  float *data;
+  PRECISION precision;
+};

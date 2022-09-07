@@ -3,23 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-struct cmp {
-  int id;
-  char *file_path;
-  int nt;
-  int nx;
-  float *data;
-};
-
-struct trace {
-  int nt;
-  float x_offset;
-  float y_offset;
-  int shot_id;
-  int cmp_id;
-};
-
-float *read_float(char *path, int nt, int nx) {
+float *read_float(char path[], int nt, int nx) {
     FILE *fptr;
     float *data;
     data = (float *) malloc(nt * nx * sizeof(float));
@@ -30,7 +14,6 @@ float *read_float(char *path, int nt, int nx) {
     }
     for (int i = 0; i < nt * nx; i++) {
         fread(&data[i], sizeof(float), 1, fptr);
-        // printf("%.53f\n", data[i]);
     }
     fclose(fptr);
     return data;

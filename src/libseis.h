@@ -1,7 +1,8 @@
 // Libseis.h
 
-float gain(float *data, int nt, int nx, float dt, float pow);
-float *read_float(char *path, int nt, int nx);
+float *gain(const float *data, int nt, int nx, float dt, float pow);
+float *read_float(char path[], int nt, int nx);
+void write_float(char path[], float *data, int nt, int nx);
 
 typedef enum {
   SINGLE,

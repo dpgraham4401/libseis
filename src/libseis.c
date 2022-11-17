@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 
 float *read_float(char path[], int nt, int nx) {
     FILE *fptr;
@@ -44,3 +45,19 @@ float *gain(const float *data, int nt, int nx, float dt, float pow) {
     return gained_data;
 }
 
+int gain_cmp(Gather *gather, float pow) {
+    Gather new_gather = {
+        gather->id,
+        gather->nt,
+        gather->nx,
+        gather->dt,
+    };
+    for (int trace_index = 0; trace_index < gather->nx; trace_index++) {
+        printf("nx: %d\n", trace_index);
+        for (int sample_index = 0; sample_index < gather->nt; sample_index++) {
+            float t_pow = powf((float) (sample_index + 1), new_gather.dt);
+            printf("%d: %f\n", (trace_index * gather->nt) + (sample_index + 1), t_pow);
+        }
+    }
+    return 0;
+}

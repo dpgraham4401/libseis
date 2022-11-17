@@ -7,7 +7,7 @@ extern "C" {
 int const nt_test = 10;
 int const nx_test = 1;
 
-float float_trace[nt_test] = {
+float float_trace1[nt_test] = {
     0.000,
     0.000,
     0.000,
@@ -20,12 +20,35 @@ float float_trace[nt_test] = {
     -0.004,
 };
 
+float cmp_array[nt_test * 2] = {
+    0.000,
+    0.000,
+    0.000,
+    0.001,
+    -0.001,
+    0.000,
+    0.021,
+    -0.016,
+    0.009,
+    -0.004,
+    0.000,
+    0.000,
+    0.000,
+    0.000,
+    0.001,
+    -0.001,
+    0.000,
+    0.021,
+    -0.016,
+    0.009,
+};
+
 struct Gather cmp = {
     1,
     nt_test,
-    nx_test,
+    2,
     0.1,
-    float_trace,
+    cmp_array,
     DOUBLE
 };
 
@@ -35,10 +58,10 @@ TEST(HelloTest, ExampleTest) {
 
 TEST(LibseisIO, ReadWriteFloat) {
     char tmp_file[] = "/tmp/data.bin";
-    write_float(tmp_file, float_trace, nt_test, nx_test);
+    write_float(tmp_file, float_trace1, nt_test, nx_test);
     float *data = read_float(tmp_file, nt_test, nx_test);
     for (int i = 0; i < nt_test; i++) {
-        EXPECT_EQ(data[i], float_trace[i]);
+        EXPECT_EQ(data[i], float_trace1[i]);
     }
 }
 

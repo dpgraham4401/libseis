@@ -44,3 +44,15 @@ float *gain(const float *data, int nt, int nx, float dt, float pow) {
     return gained_data;
 }
 
+int gain_cmp(struct Gather *gather, float pow) {
+    struct Gather new_gather = {
+        gather->id,
+        gather->nt,
+        gather->nx,
+        gather->dt,
+    };
+    printf("dt: %f\n", new_gather.dt);
+    printf("nt: %d\n", new_gather.nt);
+    printf("nx: %d\n", new_gather.nx);
+    return 0;
+}

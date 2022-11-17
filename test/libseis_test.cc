@@ -20,6 +20,15 @@ float float_trace[nt_test] = {
     -0.004,
 };
 
+struct Gather cmp = {
+    1,
+    nt_test,
+    nx_test,
+    0.1,
+    float_trace,
+    DOUBLE
+};
+
 TEST(HelloTest, ExampleTest) {
     EXPECT_EQ(7 * 6, 42);
 }
@@ -29,14 +38,12 @@ TEST(LibseisIO, ReadWriteFloat) {
     write_float(tmp_file, float_trace, nt_test, nx_test);
     float *data = read_float(tmp_file, nt_test, nx_test);
     for (int i = 0; i < nt_test; i++) {
-        printf("data %d: %.3g\n", i, data[i]);
         EXPECT_EQ(data[i], float_trace[i]);
     }
 }
 
-TEST(Gain, GainsTimeSample) {
-    float *gained_data = gain(float_trace, nt_test, nx_test, 0.1, 2);
-    for (int i = 0; i < nt_test; i++) {
-        printf("data %d: %.3g\n", i, gained_data[i]);
-    }
+TEST(GainCmp, GainsCmpGather) {
+    float t_pow = 0.5;
+    int foo = gain_cmp(&cmp, t_pow);
+    EXPECT_EQ(0, foo);
 }

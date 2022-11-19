@@ -40,7 +40,7 @@ float *read_float(char path[], int nt, int nx);
 void write_float(char path[], float *data, int nt, int nx);
 
 /**
- * gain_cmp
+ * gain_gather
  *
  * @details
  * Applies a time-variant scaling to a series of seismic traces in the same gather.
@@ -58,4 +58,4 @@ void write_float(char path[], float *data, int nt, int nx);
  * All gather attributes, besides the seismic data, are copied from the original gather
  *
  */
-int gain_cmp(Gather *gather, float pow);
+Gather *gain_gather(Gather *gather, float pow);

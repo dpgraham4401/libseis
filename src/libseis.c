@@ -45,23 +45,20 @@ float *gain(const float *data, int nt, int nx, float dt, float pow) {
     return gained_data;
 }
 
-int gain_cmp(Gather *gather, float pow) {
-    Gather new_gather = {
-        gather->id,
-        gather->nt,
-        gather->nx,
-        gather->dt,
-        malloc(gather->nt * gather->nx * sizeof(float)),
-
-    };
-    float *new_data = malloc(gather->nt * gather->nx * sizeof(float));
+Gather *gain_gather(Gather *gather, float pow) {
+    Gather *new_gather = malloc(sizeof(struct Gather));
+    new_gather->id = gather->id;
+    new_gather->nt = gather->nt;
+    new_gather->nx = gather->nx;
+    new_gather->dt = gather->dt;
+    new_gather->data = malloc(gather->nt * gather->nt * sizeof(float));
     for (int trace_index = 0; trace_index < gather->nx; trace_index++) {
         for (int sample_index = 0; sample_index < gather->nt; sample_index++) {
-            float time = (float) sample_index * new_gather.dt;
+            float time = (float) sample_index * new_gather->dt;
             float t_pow = powf(time, pow);
-            int data_index = (trace_index * new_gather.nt) + sample_index;
-            new_gather.data[data_index] = gather->data[data_index] * t_pow;
+            int data_index = (trace_index * new_gather->nt) + sample_index;
+            new_gather->data[data_index] = gather->data[data_index] * t_pow;
         }
     }
-    return 0;
+    return new_gather;
 }

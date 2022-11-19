@@ -45,7 +45,7 @@ float *gain(const float *data, int nt, int nx, float dt, float pow) {
     return gained_data;
 }
 
-int gain_cmp(Gather *gather, float pow) {
+Gather *gain_cmp(Gather *gather, float pow) {
     Gather new_gather = {
         gather->id,
         gather->nt,
@@ -63,5 +63,6 @@ int gain_cmp(Gather *gather, float pow) {
             new_gather.data[data_index] = gather->data[data_index] * t_pow;
         }
     }
-    return 0;
+    Gather *new_gather_ptr = &new_gather;
+    return new_gather_ptr;
 }

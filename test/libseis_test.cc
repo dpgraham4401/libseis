@@ -67,6 +67,7 @@ TEST(LibseisIO, ReadWriteFloat) {
 
 TEST(GainCmp, GainsCmpGather) {
     float t_pow = 2;
-    int foo = gain_cmp(&cmp, t_pow);
-    EXPECT_EQ(0, foo);
+    Gather *foo = gain_cmp(&cmp, t_pow);
+    printf("%D\n", foo->nt);
+    EXPECT_EQ(0, 0);
 }

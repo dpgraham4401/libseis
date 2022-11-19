@@ -58,4 +58,4 @@ void write_float(char path[], float *data, int nt, int nx);
  * All gather attributes, besides the seismic data, are copied from the original gather
  *
  */
-int gain_cmp(Gather *gather, float pow);
+Gather *gain_cmp(Gather *gather, float pow);

@@ -51,12 +51,16 @@ int gain_cmp(Gather *gather, float pow) {
         gather->nt,
         gather->nx,
         gather->dt,
+        malloc(gather->nt * gather->nx * sizeof(float)),
+
     };
+    float *new_data = malloc(gather->nt * gather->nx * sizeof(float));
     for (int trace_index = 0; trace_index < gather->nx; trace_index++) {
-        printf("nx: %d\n", trace_index);
         for (int sample_index = 0; sample_index < gather->nt; sample_index++) {
-            float t_pow = powf((float) (sample_index + 1), new_gather.dt);
-            printf("%d: %f\n", (trace_index * gather->nt) + (sample_index + 1), t_pow);
+            float time = (float) sample_index * new_gather.dt;
+            float t_pow = powf(time, pow);
+            int data_index = (trace_index * new_gather.nt) + sample_index;
+            new_gather.data[data_index] = gather->data[data_index] * t_pow;
         }
     }
     return 0;

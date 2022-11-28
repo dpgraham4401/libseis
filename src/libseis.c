@@ -33,18 +33,6 @@ void write_float(char path[], float *data, int nt, int nx) {
     fclose(fptr);
 }
 
-float *gain(const float *data, int nt, int nx, float dt, float pow) {
-    float *gained_data;
-    gained_data = (float *) malloc(nt * nx * sizeof(float));
-    for (int n = 1; n < nx + 1; n++) {
-        for (int t = 0; t < nt; t++) {
-            float t_float = (float) t;
-            gained_data[n * t] = data[n * t] * (dt * t_float * pow);
-        }
-    }
-    return gained_data;
-}
-
 Gather *gain_gather(Gather *gather, float pow) {
     Gather *new_gather = malloc(sizeof(struct Gather));
     new_gather->id = gather->id;

@@ -3,8 +3,8 @@
 // David Graham - 2023-15-01
 
 typedef enum {
-  SINGLE,
-  DOUBLE,
+    SINGLE,
+    DOUBLE,
 } PRECISION;
 
 /**
@@ -21,23 +21,24 @@ typedef enum {
  * @param
  * nx: (int) number traces
  * @param
- * dt: (float) the time sampling of the traces, assumed homogeneous
+ * dt: (double) the time sampling of the traces, assumed homogeneous
  * @param
  * data: (pointer) pointer to the array of samples
  * @param
- * precision: (enum PRECISION) the precision of the samples (e.g., float, double)
+ * precision: (enum PRECISION) the precision of the samples (e.g., double, double)
  */
 typedef struct Gather {
-  int id;
-  int nt; /// a is an int
-  int nx;
-  float dt;
-  float *data;
-  PRECISION precision;
+    int id;
+    int nt;
+    int nx;
+    double dt;
+    double *data;
+    PRECISION precision;
 } Gather;
 
-float *read_float(char path[], int nt, int nx);
-void write_float(char path[], float *data, int nt, int nx);
+double *read_double(char path[], int nt, int nx);
+
+void write_double(char path[], double *data, int nt, int nx);
 
 /**
  * gain_gather
@@ -51,11 +52,13 @@ void write_float(char path[], float *data, int nt, int nx);
  * @param
  * gather: A pointer to a shot, CMP, or other seismic gather with all necessary fields.
  * @param
- * pow: The power (float) applied to the seismic trace as a function of time.
+ * power: The power (double) applied to the seismic trace as a function of time.
  *
  * @returns
  * A pointer to a new gather with the supplied Tpow applied.
  * All gather attributes, besides the seismic data, are copied from the original gather
  *
  */
-Gather *gain_gather(Gather *gather, float pow);
+Gather *gain_gather(Gather *gather, double power);
+
+void display_gather(Gather *gather);

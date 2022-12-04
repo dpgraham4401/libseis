@@ -4,23 +4,23 @@
 #include <string.h>
 #include <math.h>
 
-float *read_float(char path[], int nt, int nx) {
+double *read_double(char path[], int nt, int nx) {
     FILE *fptr;
-    float *data;
-    data = (float *) malloc(nt * nx * sizeof(float));
+    double *data;
+    data = (double *) malloc(nt * nx * sizeof(double));
     fptr = fopen(path, "rb");
     if (fptr == NULL) {
         printf("unable to open file at %s\n", path);
         exit(EXIT_FAILURE);
     }
     for (int i = 0; i < nt * nx; i++) {
-        fread(&data[i], sizeof(float), 1, fptr);
+        fread(&data[i], sizeof(double), 1, fptr);
     }
     fclose(fptr);
     return data;
 }
 
-void write_float(char path[], float *data, int nt, int nx) {
+void write_double(char path[], double *data, int nt, int nx) {
     FILE *fptr;
     fptr = fopen(path, "wb");
     if (fptr == NULL) {
@@ -28,25 +28,36 @@ void write_float(char path[], float *data, int nt, int nx) {
         exit(EXIT_FAILURE);
     }
     for (int i = 0; i < nx * nt; i++) {
-        fwrite(&data[i], sizeof(float), 1, fptr);
+        fwrite(&data[i], sizeof(double), 1, fptr);
     }
     fclose(fptr);
 }
 
-Gather *gain_gather(Gather *gather, float pow) {
+Gather *gain_gather(Gather *gather, double power) {
     Gather *new_gather = malloc(sizeof(struct Gather));
     new_gather->id = gather->id;
     new_gather->nt = gather->nt;
     new_gather->nx = gather->nx;
     new_gather->dt = gather->dt;
-    new_gather->data = malloc(gather->nt * gather->nt * sizeof(float));
+    new_gather->data = malloc(gather->nt * gather->nt * sizeof(double));
     for (int trace_index = 0; trace_index < gather->nx; trace_index++) {
         for (int sample_index = 0; sample_index < gather->nt; sample_index++) {
-            float time = (float) sample_index * new_gather->dt;
-            float t_pow = powf(time, pow);
+            double time = (double) sample_index * new_gather->dt;
+            double t_pow = pow(time, power);
             int data_index = (trace_index * new_gather->nt) + sample_index;
             new_gather->data[data_index] = gather->data[data_index] * t_pow;
         }
     }
     return new_gather;
+}
+
+void display_gather(Gather *gather) {
+    printf("--------------------\n");
+    printf("Gather: id %d\n", gather->id);
+    printf("Sample Rate: %f seconds\n", gather->dt);
+    printf("Sampling Frequency: %f Hz\n", 1 / gather->dt);
+    printf("Nyquist Frequency: %f Hz\n", 1 / (gather->dt * 2));
+    printf("Samples per trace: %d\n", gather->nt);
+    printf("Number of traces: %d\n", gather->nx);
+    printf("--------------------\n");
 }

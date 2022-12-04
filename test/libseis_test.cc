@@ -53,10 +53,6 @@ struct Gather cmp = {
         DOUBLE
 };
 
-TEST(HelloTest, ExampleTest) {
-    EXPECT_EQ(7 * 6, 42);
-}
-
 TEST(LibseisIO, ReadWriteFloat) {
     char tmp_file[] = "/tmp/data.bin";
     write_double(tmp_file, double_trace1, nt_test, nx_test);
@@ -76,4 +72,8 @@ TEST(GainCmp, GainsCmpGather) {
         double t_powered = cmp.data[i] * pow(foo->dt * i, t_pow);
         EXPECT_EQ(foo->data[i], t_powered);
     }
+}
+
+TEST(Gather, GatherDisplay) {
+    display_gather(&cmp);
 }

@@ -50,3 +50,14 @@ Gather *gain_gather(Gather *gather, double power) {
     }
     return new_gather;
 }
+
+void display_gather(Gather *gather) {
+    printf("--------------------\n");
+    printf("Gather: id %d\n", gather->id);
+    printf("Sample Rate: %f seconds\n", gather->dt);
+    printf("Sampling Frequency: %f Hz\n", 1 / gather->dt);
+    printf("Nyquist Frequency: %f Hz\n", 1 / (gather->dt * 2));
+    printf("Samples per trace: %d\n", gather->nt);
+    printf("Number of traces: %d\n", gather->nx);
+    printf("--------------------\n");
+}

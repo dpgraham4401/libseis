@@ -60,3 +60,4 @@ void write_double(char path[], double *data, int nt, int nx);
  *
  */
 Gather *gain_gather(Gather *gather, double power);
+

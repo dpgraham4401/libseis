@@ -1,6 +1,7 @@
 #include "gtest/gtest.h"
 
 extern "C" {
+#include <math.h>
 #include "libseis.h"
 }
 
@@ -68,6 +69,11 @@ TEST(LibseisIO, ReadWriteFloat) {
 TEST(GainCmp, GainsCmpGather) {
     double t_pow = 2;
     Gather *foo = gain_gather(&cmp, t_pow);
-    printf("%d\n", foo->nt);
-    EXPECT_EQ(0, 0);
+
+    printf("Check that the t^power function operates correctly");
+    for (int i = 0; i < foo->nt; i++) {
+        printf("%f * (%f^%f) = %f\n", cmp.data[i], foo->dt * i, t_pow, foo->data[i]);
+        double t_powered = cmp.data[i] * pow(foo->dt * i, t_pow);
+        EXPECT_EQ(foo->data[i], t_powered);
+    }
 }

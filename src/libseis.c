@@ -33,13 +33,25 @@ void write_double(char path[], double *data, int nt, int nx) {
     fclose(fptr);
 }
 
+/**
+ * Creates a new gather with the same data as the input gather, but with each sample
+ * multiplied by a power of its corresponding time value.
+ *
+ * @param gather The input gather to be multiplied.
+ * @param power The power to raise the time values to.
+ * @return A new gather with the same dimensions as the input gather, but with modified data.
+ */
 Gather *gain_gather(Gather *gather, double power) {
-    Gather *new_gather = malloc(sizeof(struct Gather));
-    new_gather->id = gather->id;
-    new_gather->nt = gather->nt;
-    new_gather->nx = gather->nx;
-    new_gather->dt = gather->dt;
-    new_gather->data = malloc(gather->nt * gather->nt * sizeof(double));
+    Gather *new_gather = malloc(sizeof(Gather));
+    if (new_gather == NULL) {
+        fprintf(stderr, "Error: input gather is NULL\n");
+    }
+    memcpy(new_gather, gather, sizeof(Gather));
+    new_gather->data = malloc(gather->nt * gather->nx * sizeof(double));
+    if (new_gather->data == NULL) {
+        fprintf(stderr, "Error: input gather data is NULL\n");
+    }
+    memcpy(new_gather->data, gather->data, gather->nt * gather->nx * sizeof(double));
     for (int trace_index = 0; trace_index < gather->nx; trace_index++) {
         for (int sample_index = 0; sample_index < gather->nt; sample_index++) {
             double time = (double) sample_index * new_gather->dt;

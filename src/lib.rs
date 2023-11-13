@@ -1,5 +1,11 @@
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
+
+#[derive()]
+pub struct Gather {
+    id: u16,
+    number_time_samples: u16,
+    number_traces: u16,
+    time_sampling: f32,
+    data: Vec<f32>,
 }
 
 #[cfg(test)]
@@ -8,7 +14,6 @@ mod tests {
 
     #[test]
     fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
+        assert_eq!(2, 2);
     }
 }

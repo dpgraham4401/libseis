@@ -4,8 +4,9 @@
 **/*.rdb
 *.DS_Store
 **/*.bak
-**/.idea
+**/.idea/*
 **/.vscode
 /target
 /Cargo.lock
-.idea/**
+.idea/workspace.xml
+**/*.bin

@@ -1,2 +1,11 @@
+# Misc development files
+**/.env
+**/*.sqlite3
+**/*.rdb
+*.DS_Store
+**/*.bak
+**/.idea
+**/.vscode
 /target
 /Cargo.lock
+.idea/**

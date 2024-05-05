@@ -41,7 +41,8 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
 enable_testing()
-add_executable(libseis_test test/libseis_test.cpp)
+add_executable(libseis_test test/libseis_test.cpp
+        test/velocity_test.cpp)
 target_link_libraries(libseis_test ${LIB_NAME} GTest::gtest_main)
 include(GoogleTest)
 gtest_discover_tests(libseis_test)

@@ -34,4 +34,6 @@ include/*
 lib/*
 bin/*
 test/test_runner
+Testing
+test/Temporary
 *.bin

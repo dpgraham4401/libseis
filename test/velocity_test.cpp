@@ -25,3 +25,33 @@ TEST(VelocityModel, AllocateVelocityModel) {
     ASSERT_NE(model->data[i], nullptr);
   }
 }
+
+TEST(SimpleVelocityModel, ShouldApplyCorrectGradient) {
+  int rows = 5;
+  int cols = 10;
+  double gradient = 2.0;
+  double startingVelocity = 1.0;
+  VelocityModel *model = allocate_velocity_model(rows, cols);
+  model = simple_velocity_model(model, gradient, startingVelocity);
+  for (int i = 0; i < model->rows; i++) {
+    for (int j = 0; j < model->cols; j++) {
+      ASSERT_EQ(model->data[i][j], startingVelocity + gradient * i);
+    }
+  }
+  free(model);
+}
+
+TEST(SimpleVelocityModel, ShouldHandleZeroGradient) {
+  int rows = 5;
+  int cols = 10;
+  double gradient = 0.0;
+  double startingVelocity = 1.0;
+  VelocityModel *model = allocate_velocity_model(rows, cols);
+  model = simple_velocity_model(model, gradient, startingVelocity);
+  for (int i = 0; i < model->rows; i++) {
+    for (int j = 0; j < model->cols; j++) {
+      ASSERT_EQ(model->data[i][j], startingVelocity);
+    }
+  }
+  free(model);
+}

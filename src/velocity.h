@@ -13,4 +13,7 @@ typedef struct {
 
 VelocityModel *allocate_velocity_model(int rows, int cols);
 
+VelocityModel *simple_velocity_model(VelocityModel *model, double gradient,
+                                     double startingVelocity);
+
 #endif // VELOCITY_H

@@ -67,11 +67,3 @@ void write_double(char path[], double *data, int nt, int nx);
 Gather *gain_gather(Gather *gather, double power);
 
 void display_gather(Gather *gather);
-
-typedef struct {
-  int rows;
-  int cols;
-  double **data;
-} VelocityModel;
-
-VelocityModel *allocate_velocity_model(int rows, int cols);

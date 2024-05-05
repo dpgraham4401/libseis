@@ -15,12 +15,14 @@ set(SRC_DIR "src")
 
 ### create libseis library
 include_directories(src)
-add_library(${LIB_NAME} SHARED ${SRC_DIR}/libseis.c)
+add_library(${LIB_NAME} SHARED ${SRC_DIR}/libseis.c ${SRC_DIR}/velocity.c)
+
 
 set_target_properties(
         ${LIB_NAME} PROPERTIES
         VERSION "v${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}"
         PUBLIC_HEADER ${SRC_DIR}/libseis.h
+        PUBLIC_HEADER ${SRC_DIR}/velocity.h
 )
 
 install(
@@ -41,8 +43,10 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
 enable_testing()
-add_executable(libseis_test test/libseis_test.cpp
-        test/velocity_test.cpp)
+add_executable(libseis_test test/libseis_test.cpp)
+add_executable(velocity_test test/velocity_test.cpp)
 target_link_libraries(libseis_test ${LIB_NAME} GTest::gtest_main)
+target_link_libraries(velocity_test ${LIB_NAME} GTest::gtest_main)
 include(GoogleTest)
 gtest_discover_tests(libseis_test)
+gtest_discover_tests(velocity_test)

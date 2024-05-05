@@ -1,11 +1,6 @@
-//
-// Created by dg on 5/4/24.
-//
-
-#include <gtest/gtest.h>
-
+#include "gtest/gtest.h"
 extern "C" {
-#include "libseis.h"
+#include "velocity.h"
 }
 
 TEST(VelocityModel, AllocateVelocityModel) {

@@ -1,16 +1,23 @@
-# Compiled Object files
+# General
 **/.DS_Store
+**/*.bak*
+*.log
+
+## C/C++
+build/**/*
+include/*
+lib/*
+bin/*
+Testing
+tests/Temporary
+*.bin
 *.slo
 *.lo
 *.o
 *.obj
-
-# Compiled Dynamic libraries
 *.so
 *.dylib
 *.dll
-
-# Executables
 *.exe
 *.out
 *.app
@@ -26,14 +33,31 @@
 **/*.cbp
 **/CMakeScripts
 **/compile_commands.json
+build.ninja
+.cmake/
 
-## Local
+# IDE
 .idea/
-build/**/*
-include/*
-lib/*
-bin/*
-test/test_runner
-Testing
-test/Temporary
-*.bin
+.vscode/
+
+# Python
+venv/
+.venv/
+*.egg-info/
+.ipynb_checkpoints/
+.mypy_cache/
+.ruff_cache/
+/data/
+/media/
+__pycache__/
+_build/
+build/
+dist/
+.coverage*
+coverage.*
+log.html
+output.xml
+.pytest_cache/
+report.html
+coverage_html/
+

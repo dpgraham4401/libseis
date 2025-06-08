@@ -5,7 +5,7 @@
 #ifndef CPPLIB_LIBRARY_H
 #define CPPLIB_LIBRARY_H
 
-namespace mylib {
+namespace libseis {
 int add(int a, int b);
 }
 

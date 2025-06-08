@@ -22,6 +22,12 @@ tests/Temporary
 *.out
 *.app
 
+# Google Test
+googletest/
+_deps
+libseis_test[1]_include.cmake
+**/*.cmake
+
 # Cmake
 **/cmake-build-debug
 **/CMakeCache.txt
@@ -60,4 +66,3 @@ output.xml
 .pytest_cache/
 report.html
 coverage_html/
-

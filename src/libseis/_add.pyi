@@ -2,7 +2,7 @@
 Pybind11 example plugin
 -----------------------
 
-.. currentmodule:: libseis._core
+.. currentmodule:: libseis._add
 
 .. autosummary::
     :toctree: _generate

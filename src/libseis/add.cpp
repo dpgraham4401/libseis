@@ -2,19 +2,17 @@
 // Created by dg on 6/7/25.
 //
 
+#include "add.hpp"
 #include <pybind11/pybind11.h>
 
-#define STRINGIFY(x) #x
-#define MACRO_STRINGIFY(x) STRINGIFY(x)
-
-int add(int i, int j) {
-    return i + j;
-}
+namespace libseis {
+int add(const int i, const int j) { return i + j; }
+} // namespace libseis
 
 namespace py = pybind11;
 
-PYBIND11_MODULE(_core, m) {
-    m.doc() = R"pbdoc(
+PYBIND11_MODULE(_add, m) {
+  m.doc() = R"pbdoc(
         Pybind11 example plugin
         -----------------------
 
@@ -27,21 +25,22 @@ PYBIND11_MODULE(_core, m) {
            subtract
     )pbdoc";
 
-    m.def("add", &add, R"pbdoc(
+  m.def("add", &libseis::add, R"pbdoc(
         Add two numbers
 
         Some other explanation about the add function.
     )pbdoc");
 
-    m.def("subtract", [](int i, int j) { return i - j; }, R"pbdoc(
+  m.def(
+      "subtract", [](int i, int j) { return i - j; }, R"pbdoc(
         Subtract two numbers
 
         Some other explanation about the subtract function.
     )pbdoc");
 
 #ifdef VERSION_INFO
-    m.attr("__version__") = MACRO_STRINGIFY(VERSION_INFO);
+  m.attr("__version__") = MACRO_STRINGIFY(VERSION_INFO);
 #else
-    m.attr("__version__") = "dev";
+  m.attr("__version__") = "dev";
 #endif
 }

@@ -1,5 +1,4 @@
-from __future__ import annotations
+from ._num import __doc__, add
+from .math import add_one
 
-from ._add import __doc__, add
-
-__all__ = ["__doc__", "add"]
+__all__ = ["__doc__", "add", "add_one"]

@@ -2,7 +2,7 @@
 // Created by dg on 6/8/25.
 //
 
-#include "velocity.hpp"
+#include "../libseis/velocity.hpp"
 
 VelocityModel::VelocityModel(const int rows, const int cols)
     : _rows(rows), _cols(cols), _data(rows * cols) {

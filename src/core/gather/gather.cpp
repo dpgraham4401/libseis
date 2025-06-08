@@ -2,7 +2,7 @@
 // Created by dg on 6/8/25.
 //
 
-#include "gather.hpp"
+#include "../libseis/gather.hpp"
 #include <cmath>
 #include <cstdio>
 #include <cstdlib>

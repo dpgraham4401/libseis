@@ -1,17 +1,13 @@
 //
-// Created by dg on 6/7/25.
+// Created by David Graham on 6/8/25.
 //
 
-#include "add.hpp"
+#include "add/add.hpp"
 #include <pybind11/pybind11.h>
-
-namespace libseis {
-int add(const int i, const int j) { return i + j; }
-} // namespace libseis
 
 namespace py = pybind11;
 
-PYBIND11_MODULE(_add, m) {
+PYBIND11_MODULE(_num, m) {
   m.doc() = R"pbdoc(
         Pybind11 example plugin
         -----------------------

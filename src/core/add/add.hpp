@@ -6,7 +6,7 @@
 #define CPPLIB_LIBRARY_H
 
 namespace libseis {
-int add(int a, int b);
+int add(int i, int j);
 }
 
 #endif // CPPLIB_LIBRARY_H

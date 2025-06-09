@@ -20,10 +20,15 @@ classifiers = [
 
 
 [dependency-groups]
+build = [
+    "pybind11>=2.13.6",
+]
 dev = [
     "pre-commit>=4.2.0",
     "pytest>=8.4.0",
+    "pytest-xdist>=3.7.0",
     "ruff>=0.11.13",
+    { include-group = "build" },
 ]
 
 [build-system]

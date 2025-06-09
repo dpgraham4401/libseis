@@ -12,9 +12,14 @@ add_subdirectory(src/core)
 set(PYBIND11_FINDPYTHON ON)
 find_package(pybind11 CONFIG REQUIRED)
 find_package(Python REQUIRED COMPONENTS Interpreter Development.Module)
+
 pybind11_add_module(_num MODULE src/core/bindings.cpp)
 target_link_libraries(_num PRIVATE libseis)
 install(TARGETS _num DESTINATION libseis)
+
+pybind11_add_module(_gather MODULE src/core/bindings.cpp)
+target_link_libraries(_gather PRIVATE libseis)
+install(TARGETS _gather DESTINATION libseis)
 
 # Testing ###
 include(FetchContent)

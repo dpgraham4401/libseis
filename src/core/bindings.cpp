@@ -5,6 +5,8 @@
 #include "add/add.hpp"
 #include <pybind11/pybind11.h>
 
+#include "gather.hpp"
+
 namespace py = pybind11;
 
 PYBIND11_MODULE(_num, m) {
@@ -27,16 +29,19 @@ PYBIND11_MODULE(_num, m) {
         Some other explanation about the add function.
     )pbdoc");
 
-  m.def(
-      "subtract", [](int i, int j) { return i - j; }, R"pbdoc(
-        Subtract two numbers
-
-        Some other explanation about the subtract function.
-    )pbdoc");
-
 #ifdef VERSION_INFO
   m.attr("__version__") = MACRO_STRINGIFY(VERSION_INFO);
 #else
   m.attr("__version__") = "dev";
 #endif
+}
+
+PYBIND11_MODULE(_gather, m) {
+  py::class_<Gather>(m, "Gather")
+      .def(py::init<>())
+      .def_readwrite("id", &Gather::id)
+      .def_readwrite("dt", &Gather::dt)
+      .def_readwrite("nt", &Gather::nt)
+      .def_readwrite("nx", &Gather::nx)
+      .def("__str__", &Gather::display);
 }

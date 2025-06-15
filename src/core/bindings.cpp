@@ -3,8 +3,8 @@
 //
 
 #include "add/add.hpp"
+#include <pybind11/numpy.h>
 #include <pybind11/pybind11.h>
-#include <pybind11/stl.h>
 
 #include "gather.hpp"
 
@@ -44,7 +44,12 @@ PYBIND11_MODULE(_gather, m) {
       .def_readwrite("dt", &Gather::dt)
       .def_readwrite("nt", &Gather::nt)
       .def_readwrite("nx", &Gather::nx)
-      .def_readonly("data", &Gather::data)
+      .def("as_numpy",
+           [](Gather &self) -> py::array_t<double> {
+             return py::array_t<double>(
+                 {self.nt, self.nx}, {sizeof(double) * self.nx, sizeof(double)},
+                 self.data.data(), py::cast(&self));
+           })
       .def("__str__", &Gather::display)
       .def("from_bin_file", &Gather::from_bin_file);
 }

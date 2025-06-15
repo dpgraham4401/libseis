@@ -1,3 +1,4 @@
+import numpy as np
 import pytest
 
 from libseis import Gather
@@ -36,4 +37,4 @@ class TestReadSeismicData:
         """Test reading a gather."""
         # Assuming the Gather class has a method to read data
         gather = Gather.from_bin_file(seismic_trace_1d_file, 4, 1, 0.004)
-        assert isinstance(gather.data, list)
+        assert isinstance(gather.as_numpy(), np.ndarray)

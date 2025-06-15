@@ -25,3 +25,11 @@ class Gather:
         Returns:
             Self: An instance of Gather with data loaded.
         """
+
+    def as_numpy(self) -> list[float]:
+        """
+        Convert the gather data to a numpy array.
+
+        Returns:
+            list[float]: The gather data as a numpy array.
+        """

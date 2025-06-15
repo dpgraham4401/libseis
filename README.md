@@ -9,6 +9,7 @@ to reacquaint myself with the C/C++, geophysics, and binding with Python.
 
 ### Prerequisites
 
+- [Just](https://just.systems/)
 - CMake
 - C++ compiler (e.g., g++, clang++)
 - Python > 3.12

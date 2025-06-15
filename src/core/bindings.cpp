@@ -4,6 +4,7 @@
 
 #include "add/add.hpp"
 #include <pybind11/pybind11.h>
+#include <pybind11/stl.h>
 
 #include "gather.hpp"
 
@@ -38,10 +39,12 @@ PYBIND11_MODULE(_num, m) {
 
 PYBIND11_MODULE(_gather, m) {
   py::class_<Gather>(m, "Gather")
-      .def(py::init<>())
+      .def(py::init<int, int, int, double>())
       .def_readwrite("id", &Gather::id)
       .def_readwrite("dt", &Gather::dt)
       .def_readwrite("nt", &Gather::nt)
       .def_readwrite("nx", &Gather::nx)
-      .def("__str__", &Gather::display);
+      .def_readonly("data", &Gather::data)
+      .def("__str__", &Gather::display)
+      .def("from_bin_file", &Gather::from_bin_file);
 }

@@ -17,6 +17,9 @@ classifiers = [
     "Programming Language :: Python :: 3.13",
     "Private :: Do Not Upload",
 ]
+dependencies = [
+    "numpy>=2.2.6",
+]
 
 
 [dependency-groups]

@@ -2,10 +2,10 @@
 // Created by David Graham on 6/8/25.
 //
 
-#include "add/add.hpp"
 #include <pybind11/numpy.h>
 #include <pybind11/pybind11.h>
 
+#include "add/add.hpp"
 #include "gather.hpp"
 
 namespace py = pybind11;
@@ -47,15 +47,15 @@ PYBIND11_MODULE(_gather, m) {
       .def_property(
           "_data",
           // Getter: return numpy array (zero-copy)
-          [](Gather &self) -> py::array {
+          [](Gather& self) -> py::array {
             return py::array({self.nt, self.nx},
                              {sizeof(double) * self.nx, sizeof(double)},
                              self.data.data(), py::cast(&self));
           },
           // Setter: accept 2D NumPy array and copy into C++ vector
-          [](Gather &self,
+          [](Gather& self,
              const py::array_t<double, py::array::c_style |
-                                           py::array::forcecast> &arr) {
+                                           py::array::forcecast>& arr) {
             if (arr.ndim() != 2)
               throw std::runtime_error("data must be 2D");
             if (arr.shape(0) != self.nt || arr.shape(1) != self.nx)

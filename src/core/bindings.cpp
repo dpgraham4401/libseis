@@ -44,12 +44,26 @@ PYBIND11_MODULE(_gather, m) {
       .def_readwrite("dt", &Gather::dt)
       .def_readwrite("nt", &Gather::nt)
       .def_readwrite("nx", &Gather::nx)
-      .def("as_numpy",
-           [](Gather &self) -> py::array_t<double> {
-             return py::array_t<double>(
-                 {self.nt, self.nx}, {sizeof(double) * self.nx, sizeof(double)},
-                 self.data.data(), py::cast(&self));
-           })
+      .def_property(
+          "_data",
+          // Getter: return numpy array (zero-copy)
+          [](Gather &self) -> py::array {
+            return py::array({self.nt, self.nx},
+                             {sizeof(double) * self.nx, sizeof(double)},
+                             self.data.data(), py::cast(&self));
+          },
+          // Setter: accept 2D NumPy array and copy into C++ vector
+          [](Gather &self,
+             const py::array_t<double, py::array::c_style |
+                                           py::array::forcecast> &arr) {
+            if (arr.ndim() != 2)
+              throw std::runtime_error("data must be 2D");
+            if (arr.shape(0) != self.nt || arr.shape(1) != self.nx)
+              throw std::runtime_error("Shape mismatch with (nt, nx)");
+
+            std::memcpy(self.data.data(), arr.data(),
+                        sizeof(double) * self.nt * self.nx);
+          })
       .def("__str__", &Gather::display)
       .def("from_bin_file", &Gather::from_bin_file);
 }

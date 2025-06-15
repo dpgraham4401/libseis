@@ -1,5 +1,7 @@
 from typing import Self
 
+import numpy as np
+
 class Gather:
     """
     A seismic gather.
@@ -9,7 +11,7 @@ class Gather:
     nt: int
     nx: int
     dt: float
-    data: list[float]
+    _data: np.ndarray
 
     def __init__(
         self, id: int = 0, nt: int = 0, nx: int = 0, dt: float = 0
@@ -26,12 +28,4 @@ class Gather:
 
         Returns:
             Self: An instance of Gather with data loaded.
-        """
-
-    def as_numpy(self) -> list[float]:
-        """
-        Convert the gather data to a numpy array.
-
-        Returns:
-            list[float]: The gather data as a numpy array.
         """

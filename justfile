@@ -1,13 +1,19 @@
 #!/usr/bin/env just --justfile
 
-build:
+init:
+    #!/usr/bin/env bash
+    uv venv --allow-existing
+    uv sync
+
+build: init
+    #!/usr/bin/env bash
+    source .venv/bin/activate
     cmake -B build -S .
     cmake --build build
-    uv sync
 
-release:
-    uv sync
-
-test:
+test: init
+    #!/usr/bin/env bash
     source .venv/bin/activate
     pytest
+    cd build
+    ctest --output-on-failure

@@ -3,7 +3,7 @@ name: CI
 on:
   push:
     branches:
-    - "main"
+      - "main"
   pull_request:
 
 env:
@@ -36,6 +36,23 @@ jobs:
         working-directory: ${{github.workspace}}/build
         # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
         run: ctest -C ${{env.BUILD_TYPE}}
+
+  lint_cpp:
+    name: "Lint C++"
+    strategy:
+      matrix:
+        os: [ ubuntu-latest ]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 'Run clang-format.'
+        uses: jidicula/clang-format-action@v4.15.0
+        with:
+          clang-format-version: '20'
+          check-path: 'src'
+
 
   python_tests:
     name: "Python Tests"

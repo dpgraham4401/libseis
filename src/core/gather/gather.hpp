@@ -19,8 +19,7 @@ class Gather {
 
   [[nodiscard]] std::string display() const;
 
-  static Gather from_bin_file(const std::string& path, int nt, int nx,
-                              double dt);
+  static Gather from_bin_file(const std::string& path, int nt, int nx, double dt);
 };
 
 #endif  // GATHER_H

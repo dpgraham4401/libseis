@@ -19,8 +19,7 @@ const double& VelocityModel::at(int row, int col) const {
   return _data.at(row * _cols + col);
 }
 
-void VelocityModel::initialize_simple_model(const double gradient,
-                                            const double starting_velocity) {
+void VelocityModel::initialize_simple_model(const double gradient, const double starting_velocity) {
   for (int i = 0; i < _rows; ++i) {
     for (int j = 0; j < _cols; ++j) {
       at(i, j) = starting_velocity + gradient * i;

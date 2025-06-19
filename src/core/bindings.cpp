@@ -41,9 +41,9 @@ PYBIND11_MODULE(_gather, m) {
   py::class_<Gather>(m, "Gather")
       .def(py::init<int, int, int, double>())
       .def_readwrite("id", &Gather::id)
-      .def_readwrite("dt", &Gather::dt)
       .def_readwrite("nt", &Gather::nt)
       .def_readwrite("nx", &Gather::nx)
+      .def_readwrite("dt", &Gather::dt)
       .def_readonly("data", &Gather::data)
       .def("__str__", &Gather::display)
       .def("from_bin_file", &Gather::from_bin_file);

@@ -48,7 +48,7 @@ cache-keys = [
 [tool.scikit-build]
 wheel.expand-macos-universal-tags = true
 minimum-version = "build-system.requires"
-build-dir = "build/"
+build-dir = "build/{wheel_tag}"
 
 
 [tool.pytest.ini_options]

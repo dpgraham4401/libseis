@@ -18,6 +18,9 @@ public:
   double dt;
   std::vector<double> data;
 
+  // Gather() = default;
+  Gather() {}
+
   Gather(const int id, const int nt, const int nx, const double dt)
       : id(id), nt(nt), nx(nx), dt(dt), data() {}
 

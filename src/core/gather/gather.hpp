@@ -25,10 +25,32 @@ public:
     data.resize(nt * nx);
   }
 
-  [[nodiscard]] std::string display() const {
+  /**
+   * @brief a helper function used for Python __str__ method.
+   */
+  [[nodiscard]] std::string str() const {
     return "Gather id: " + std::to_string(id);
   }
 
+  /**
+   * @brief overload the output stream operator for Gather.
+   */
+  friend std::ostream &operator<<(std::ostream &os, const Gather &gather) {
+    os << "Gather id: " << gather.id << std::endl;
+    return os;
+  }
+
+  /**
+   * @brief Read a binary file and create a Gather object.
+   *
+   * This function takes a file path (string), the number of time samples (nt),
+   * and the number of traces (nx) to read from the binary file.
+   *
+   * @param path the path to the binary file.
+   * @param nt the number of time samples per trace.
+   * @param nx the number of traces per gather.
+   * @return Gather object populated with data from the file.
+   */
   static Gather from_bin_file(const std::string &path, int nt, int nx,
                               double dt = 0.0) {
     std::ifstream file(path, std::ios::binary);

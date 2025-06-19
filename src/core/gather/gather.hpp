@@ -12,17 +12,18 @@
 
 class Gather {
 public:
-  int id;
-  int nt;
-  int nx;
-  double dt;
+  int id{};
+  int nt{};
+  int nx{};
+  double dt{};
   std::vector<double> data;
 
-  // Gather() = default;
-  Gather() {}
+  Gather() = default;
 
   Gather(const int id, const int nt, const int nx, const double dt)
-      : id(id), nt(nt), nx(nx), dt(dt), data() {}
+      : id{id}, nt{nt}, nx{nx}, dt{dt} {
+    data.resize(nt * nx);
+  }
 
   [[nodiscard]] std::string display() const {
     return "Gather id: " + std::to_string(id);

@@ -47,6 +47,6 @@ PYBIND11_MODULE(_gather, m) {
       .def_readwrite("nx", &Gather::nx)
       .def_readwrite("dt", &Gather::dt)
       .def_readonly("data", &Gather::data)
-      .def("__str__", &Gather::display)
+      .def("__str__", &Gather::str)
       .def("from_bin_file", &Gather::from_bin_file);
 }

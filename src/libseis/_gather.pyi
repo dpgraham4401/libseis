@@ -11,7 +11,9 @@ class Gather:
     dt: float
     data: list[float]
 
-    def __init__(self, id: int = 0, nt: int = 0, nx: int = 0) -> Self: ...
+    def __init__(
+        self, id: int = 0, nt: int = 0, nx: int = 0, dt: float = 0
+    ) -> Self: ...
     @staticmethod
     def from_bin_file(
         filename: str,

@@ -39,7 +39,9 @@ PYBIND11_MODULE(_num, m) {
 
 PYBIND11_MODULE(_gather, m) {
   py::class_<Gather>(m, "Gather")
-      .def(py::init<int, int, int, double>())
+      // .def(py::init<int, int, int, double>())
+      .def(py::init<int, int, int, double>(), py::arg("id"), py::arg("nt"),
+           py::arg("nx"), py::arg("dt"))
       .def_readwrite("id", &Gather::id)
       .def_readwrite("nt", &Gather::nt)
       .def_readwrite("nx", &Gather::nx)

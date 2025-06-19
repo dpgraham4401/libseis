@@ -9,7 +9,7 @@ class TestSeismicGather:
     @pytest.fixture
     def gather(self):
         """Fixture to create a Gather instance."""
-        return Gather(1, 2, 3, 4.0)
+        return Gather(id=1, nt=2, nx=3, dt=4.0)
 
     def test_gather_init(self, gather):
         """Test the Gather class base constructor."""

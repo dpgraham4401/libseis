@@ -52,7 +52,7 @@ class TestReadSeismicData:
     def test_loads_dimensions_correctly(self, seismic_trace_1d_file, nt, nx):
         """Test reading a gather."""
         # Assuming the Gather class has a method to read data
-        NUM_DIM = 2
+        num_dim = 2
         gather = Gather.from_bin_file(seismic_trace_1d_file, nt, nx, 0.004)
-        assert gather.data.ndim == NUM_DIM
+        assert gather.data.ndim == num_dim
         assert gather.data.size == nt * nx

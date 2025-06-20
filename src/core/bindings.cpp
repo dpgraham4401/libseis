@@ -47,7 +47,7 @@ PYBIND11_MODULE(_gather, m) {
       .def_readwrite("nt", &Gather::nt)
       .def_readwrite("nx", &Gather::nx)
       .def_property(
-          "_data",
+          "data",
           // Getter: return numpy array (zero-copy)
           [](Gather& self) -> py::array {
             return py::array({self.nt, self.nx}, {sizeof(double) * self.nx, sizeof(double)},

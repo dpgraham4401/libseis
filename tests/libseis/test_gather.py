@@ -37,4 +37,4 @@ class TestReadSeismicData:
         """Test reading a gather."""
         # Assuming the Gather class has a method to read data
         gather = Gather.from_bin_file(seismic_trace_1d_file, 4, 1, 0.004)
-        assert isinstance(gather._data, np.ndarray)
+        assert isinstance(gather.data, np.ndarray)

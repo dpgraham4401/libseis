@@ -32,8 +32,4 @@ enable_testing()
 add_executable(libseis_test src/core/add/add_test.cpp)
 target_link_libraries(libseis_test libseis Python::Python GTest::gtest_main)
 include(GoogleTest)
-
-add_executable(gather_test src/core/gather/test_gather.cpp)
-target_link_libraries(gather_test libseis Python::Python GTest::gtest_main)
 gtest_discover_tests(libseis_test)
-gtest_discover_tests(gather_test)

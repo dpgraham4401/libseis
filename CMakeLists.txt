@@ -4,6 +4,7 @@ project(
   ${SKBUILD_PROJECT_NAME}
   VERSION ${SKBUILD_PROJECT_VERSION}
   LANGUAGES CXX)
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 # Include core modules
 add_subdirectory(src/core)

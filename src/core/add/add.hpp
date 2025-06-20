@@ -9,4 +9,4 @@ namespace libseis {
 int add(int i, int j);
 }
 
-#endif // CPPLIB_LIBRARY_H
+#endif  // CPPLIB_LIBRARY_H

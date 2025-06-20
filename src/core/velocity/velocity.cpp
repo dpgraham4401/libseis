@@ -11,16 +11,15 @@ VelocityModel::VelocityModel(const int rows, const int cols)
   }
 }
 
-double &VelocityModel::at(const int row, const int col) {
+double& VelocityModel::at(const int row, const int col) {
   return _data.at(row * _cols + col);
 }
 
-const double &VelocityModel::at(int row, int col) const {
+const double& VelocityModel::at(int row, int col) const {
   return _data.at(row * _cols + col);
 }
 
-void VelocityModel::initialize_simple_model(const double gradient,
-                                            const double starting_velocity) {
+void VelocityModel::initialize_simple_model(const double gradient, const double starting_velocity) {
   for (int i = 0; i < _rows; ++i) {
     for (int j = 0; j < _cols; ++j) {
       at(i, j) = starting_velocity + gradient * i;

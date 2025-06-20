@@ -5,5 +5,7 @@
 #include "add.hpp"
 
 namespace libseis {
-int add(const int i, const int j) { return i + j; }
-} // namespace libseis
+int add(const int i, const int j) {
+  return i + j;
+}
+}  // namespace libseis

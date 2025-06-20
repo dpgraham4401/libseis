@@ -2,9 +2,9 @@
 // Created by David Graham on 6/8/25.
 //
 
-#include "add/add.hpp"
 #include <pybind11/numpy.h>
 #include <pybind11/pybind11.h>
+#include "add/add.hpp"
 
 #include "gather.hpp"
 
@@ -40,8 +40,8 @@ PYBIND11_MODULE(_num, m) {
 PYBIND11_MODULE(_gather, m) {
   py::class_<Gather>(m, "Gather")
       // .def(py::init<int, int, int, double>())
-      .def(py::init<int, int, int, double>(), py::arg("id"), py::arg("nt"),
-           py::arg("nx"), py::arg("dt"))
+      .def(py::init<int, int, int, double>(), py::arg("id"), py::arg("nt"), py::arg("nx"),
+           py::arg("dt"))
       .def_readwrite("id", &Gather::id)
       .def_readwrite("dt", &Gather::dt)
       .def_readwrite("nt", &Gather::nt)
@@ -49,22 +49,19 @@ PYBIND11_MODULE(_gather, m) {
       .def_property(
           "_data",
           // Getter: return numpy array (zero-copy)
-          [](Gather &self) -> py::array {
-            return py::array({self.nt, self.nx},
-                             {sizeof(double) * self.nx, sizeof(double)},
+          [](Gather& self) -> py::array {
+            return py::array({self.nt, self.nx}, {sizeof(double) * self.nx, sizeof(double)},
                              self.data.data(), py::cast(&self));
           },
           // Setter: accept 2D NumPy array and copy into C++ vector
-          [](Gather &self,
-             const py::array_t<double, py::array::c_style |
-                                           py::array::forcecast> &arr) {
+          [](Gather& self,
+             const py::array_t<double, py::array::c_style | py::array::forcecast>& arr) {
             if (arr.ndim() != 2)
               throw std::runtime_error("data must be 2D");
             if (arr.shape(0) != self.nt || arr.shape(1) != self.nx)
               throw std::runtime_error("Shape mismatch with (nt, nx)");
 
-            std::memcpy(self.data.data(), arr.data(),
-                        sizeof(double) * self.nt * self.nx);
+            std::memcpy(self.data.data(), arr.data(), sizeof(double) * self.nt * self.nx);
           })
       .def("__str__", &Gather::str)
       .def("from_bin_file", &Gather::from_bin_file);
